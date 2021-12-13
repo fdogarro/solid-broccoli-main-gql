@@ -54,10 +54,24 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
+      // saveBook : async (parent, { bookBody }, context) => {
+      //   if (context.user) {
+      //     const updatedUser = await User.findOneAndUpdate(
+      //       { _id: context.user._id },
+      //       { $addToSet: { savedBooks: bookBody } },
+      //       { new: true }
+      //     ).populate('savedBooks');
+  
+      //     return updatedUser;
+      //   }
+  
+      //   throw new AuthenticationError('You need to be logged in!');
+      // },
       saveBook : async (parent, { bookBody }, context) => {
+        console.log("Context", context.user)
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
-            { _id: context.user._id },
+            { _id: user._Id },
             { $addToSet: { savedBooks: bookBody } },
             { new: true }
           ).populate('savedBooks');
